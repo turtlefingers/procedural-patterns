@@ -1,55 +1,201 @@
-// 형태 문법 — 「정사각형 → 일부 변에 축소·회전된 정사각형 부착」 규칙의 재귀 적용.
-// 검은 윤곽선. 클릭: 새 규칙.
-let rule, shapes = [];
+const presets = [
+  {
+    name: "Square: 4 Corners (Design 1)",
+    shapeType: "square",
+    depth: 5,
+    baseSize: 180,
+    rules: [
+      { tx: 0.5, ty: 0.5, scale: 0.5, rot: 0 },
+      { tx: -0.5, ty: 0.5, scale: 0.5, rot: 0 },
+      { tx: 0.5, ty: -0.5, scale: 0.5, rot: 0 },
+      { tx: -0.5, ty: -0.5, scale: 0.5, rot: 0 }
+    ]
+  },
+  {
+    name: "Square: 3 Corners (Design 4)",
+    shapeType: "square",
+    depth: 6,
+    baseSize: 200,
+    rules: [
+      { tx: 0.5, ty: 0.5, scale: 0.5, rot: 0 },
+      { tx: -0.5, ty: 0.5, scale: 0.5, rot: 0 },
+      { tx: 0.5, ty: -0.5, scale: 0.5, rot: 0 }
+    ]
+  },
+  {
+    name: "Square: Corner Spiral",
+    shapeType: "square",
+    depth: 14,
+    baseSize: 160,
+    rules: [
+      { tx: 0.5, ty: 0.5, scale: 0.85, rot: Math.PI / 8 }
+    ]
+  },
+  {
+    name: "Square: Twin Spiral (Design 3)",
+    shapeType: "square",
+    depth: 10,
+    baseSize: 150,
+    rules: [
+      { tx: 0.5, ty: 0.5, scale: 0.7, rot: Math.PI / 10 },
+      { tx: -0.5, ty: -0.5, scale: 0.7, rot: Math.PI / 10 }
+    ]
+  },
+  {
+    name: "Square: Edge Connect",
+    shapeType: "square",
+    depth: 5,
+    baseSize: 160,
+    rules: [
+      { tx: 0.5, ty: 0, scale: 0.45, rot: Math.PI / 4 },
+      { tx: -0.5, ty: 0, scale: 0.45, rot: Math.PI / 4 },
+      { tx: 0, ty: 0.5, scale: 0.45, rot: Math.PI / 4 },
+      { tx: 0, ty: -0.5, scale: 0.45, rot: Math.PI / 4 }
+    ]
+  },
+  {
+    name: "Triangle: Sierpinski (Design 1)",
+    shapeType: "triangle",
+    depth: 6,
+    baseSize: 250,
+    rules: [
+      { tx: 0, ty: -0.577, scale: 0.5, rot: 0 },
+      { tx: 0.5, ty: 0.288, scale: 0.5, rot: 0 },
+      { tx: -0.5, ty: 0.288, scale: 0.5, rot: 0 }
+    ]
+  },
+  {
+    name: "Triangle: Outer Spiral",
+    shapeType: "triangle",
+    depth: 7,
+    baseSize: 200,
+    rules: [
+      { tx: 0, ty: -0.577, scale: 0.45, rot: Math.PI / 6 },
+      { tx: 0.5, ty: 0.288, scale: 0.45, rot: Math.PI / 6 },
+      { tx: -0.5, ty: 0.288, scale: 0.45, rot: Math.PI / 6 }
+    ]
+  },
+  {
+    name: "Triangle: Twin Swirl (Design 4)",
+    shapeType: "triangle",
+    depth: 12,
+    baseSize: 180,
+    rules: [
+      { tx: 0.5, ty: 0.288, scale: 0.8, rot: Math.PI / 6 },
+      { tx: -0.5, ty: 0.288, scale: 0.8, rot: Math.PI / 6 }
+    ]
+  },
+  {
+    name: "Triangle: Hexa Branch",
+    shapeType: "triangle",
+    depth: 5,
+    baseSize: 150,
+    rules: [
+      { tx: 0, ty: -0.577, scale: 0.4, rot: Math.PI },
+      { tx: 0.5, ty: 0.288, scale: 0.4, rot: Math.PI },
+      { tx: -0.5, ty: 0.288, scale: 0.4, rot: Math.PI },
+      { tx: 0, ty: 0.577, scale: 0.4, rot: 0 },
+      { tx: -0.5, ty: -0.288, scale: 0.4, rot: 0 },
+      { tx: 0.5, ty: -0.288, scale: 0.4, rot: 0 }
+    ]
+  }
+];
+
+let currentPresetIndex = 0;
+let shapes = [];
+let drawingProgress = 0;
 
 function setup() {
-  createCanvas(500, 500);
-  regenerate();
-  noLoop();
+  let canvas = createCanvas(windowWidth, windowHeight);
+  canvas.style('display', 'block');
+  loadPreset(currentPresetIndex);
 }
 
-function regenerate() {
-  const edges = shuffle([0, 1, 2, 3]).slice(0, floor(random(2, 4)));
-  rule = {
-    edges,
-    scale: random(0.55, 0.74),
-    rot: random(-0.45, 0.45),
-    depth: 8,
-  };
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  loadPreset(currentPresetIndex);
+}
+
+function applyPreset(preset, x, y, s, a, depth) {
+  if (depth <= 0 || s < 2 || shapes.length > 15000) return;
+  
+  shapes.push({ type: preset.shapeType, x, y, s, a, depth, maxDepth: preset.depth });
+
+  for (let rule of preset.rules) {
+    // Relative coordinates
+    let localX = rule.tx * s;
+    let localY = rule.ty * s;
+    
+    // Rotate relative to current angle 'a'
+    let rx = localX * cos(a) - localY * sin(a);
+    let ry = localX * sin(a) + localY * cos(a);
+    
+    let nextX = x + rx;
+    let nextY = y + ry;
+    let nextS = s * rule.scale;
+    let nextA = a + rule.rot;
+    
+    applyPreset(preset, nextX, nextY, nextS, nextA, depth - 1);
+  }
+}
+
+function loadPreset(index) {
+  let preset = presets[index];
   shapes = [];
-  applyRule(width / 2, height / 2 + 90, 100, -HALF_PI, rule.depth);
-  redraw();
-}
-
-function applyRule(x, y, s, a, depth) {
-  if (depth <= 0 || s < 2.5 || shapes.length > 4000) return;
-  shapes.push({ x, y, s, a, depth });
-  for (const e of rule.edges) {
-    const childS = s * rule.scale;
-    const edgeA = a + e * HALF_PI;
-    const childA = edgeA + rule.rot;
-    const cx = x + cos(edgeA) * (s / 2 + childS / 2 * cos(rule.rot));
-    const cy = y + sin(edgeA) * (s / 2 + childS / 2 * cos(rule.rot));
-    applyRule(cx, cy, childS, childA, depth - 1);
+  
+  let cx = width / 2;
+  let cy = height / 2;
+  
+  applyPreset(preset, cx, cy, preset.baseSize, 0, preset.depth);
+  
+  // Sort shapes by depth descending (base shapes drawn first)
+  shapes.sort((a, b) => b.depth - a.depth);
+  drawingProgress = 0;
+  
+  let nameEl = document.getElementById('preset-name');
+  if (nameEl) {
+    nameEl.innerText = `${index + 1}/${presets.length} - ${preset.name}`;
   }
 }
 
 function draw() {
-  background(248);
-  rectMode(CENTER);
+  background('#1a1a1a');
+  
+  // Draw shapes up to drawingProgress
+  stroke(255, 255, 255, 180);
   noFill();
-  stroke(0);
-  for (const sh of shapes) {
+  
+  let drawCount = min(floor(drawingProgress), shapes.length);
+  for(let i=0; i<drawCount; i++) {
+    let sh = shapes[i];
     push();
     translate(sh.x, sh.y);
-    rotate(sh.a + HALF_PI);
-    strokeWeight(map(sh.depth, 0, rule.depth, 0.5, 1.8));
-    rect(0, 0, sh.s, sh.s);
+    rotate(sh.a);
+    
+    // Stroke weight based on generation depth
+    let weight = map(sh.depth, 1, sh.maxDepth, 0.5, 2.5);
+    strokeWeight(weight);
+    
+    if (sh.type === 'square') {
+      rectMode(CENTER);
+      rect(0, 0, sh.s, sh.s);
+    } else if (sh.type === 'triangle') {
+      let r = sh.s / sqrt(3);
+      triangle(
+        0, -r,
+        sh.s/2, r/2,
+        -sh.s/2, r/2
+      );
+    }
     pop();
   }
-  rectMode(CORNER);
+  
+  if (drawingProgress < shapes.length) {
+    drawingProgress += max(2, shapes.length / 50); // Finish drawing within roughly 50 frames
+  }
 }
 
 function mousePressed() {
-  if (mouseX >= 0 && mouseX < width && mouseY >= 0 && mouseY < height) regenerate();
+  currentPresetIndex = (currentPresetIndex + 1) % presets.length;
+  loadPreset(currentPresetIndex);
 }
