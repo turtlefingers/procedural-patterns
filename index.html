@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>절차적 무늬 (Procedural Patterns)</title>
+  <style>
+    :root {
+      --bg-color: #fcfcfc;
+      --text-main: #111111;
+      --text-muted: #666666;
+      --border: #eaeaea;
+      --card-bg: #ffffff;
+      --hover-bg: #f9f9f9;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text-main);
+      background-color: var(--bg-color);
+      -webkit-font-smoothing: antialiased;
+      word-break: keep-all;
+    }
+
+    header {
+      background-color: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 80px 24px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+
+    header h1 span {
+      font-weight: 300;
+      color: var(--text-muted);
+    }
+
+    header p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+
+    section {
+      margin-bottom: 80px;
+    }
+
+    .section-header {
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--text-main);
+    }
+
+    .section-header h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+
+    .section-header p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      display: block;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      text-decoration: none;
+      color: var(--text-main);
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      background-color: var(--text-main);
+      color: var(--bg-color);
+    }
+
+    .card:hover h3 {
+      color: var(--bg-color);
+    }
+
+    .card:hover p {
+      color: #aaaaaa;
+    }
+
+    .card:hover .tag {
+      background-color: #333333;
+      color: #dddddd;
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .card .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      background-color: #f0f0f0;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Procedural Patterns</h1>
+    <p>주체와 통제권의 관점에서 분류한 37가지 그래픽 알고리즘 컬렉션</p>
+  </header>
+
+  <main>
+    <!-- 1단계 -->
+    <section>
+      <div class="section-header">
+        <h2>1단계: 직접 통제와 규칙</h2>
+        <p>Direct Control & Rules</p>
+      </div>
+      <div class="grid">
+        <a href="1-geometry/wallpaper-group/index.html" class="card">
+          <h3>벽지군</h3>
+          <p>Wallpaper Groups</p>
+        </a>
+        <a href="1-geometry/frieze-group/index.html" class="card">
+          <h3>프리즈군</h3>
+          <p>Frieze Groups</p>
+        </a>
+        <a href="1-geometry/kaleidoscope/index.html" class="card">
+          <h3>만화경 대칭</h3>
+          <p>Kaleidoscope</p>
+        </a>
+        <a href="1-geometry/girih/index.html" class="card">
+          <h3>이슬람 기하학 패턴</h3>
+          <p>Girih</p>
+        </a>
+        <a href="1-geometry/wang-tiles/index.html" class="card">
+          <h3>왕타일</h3>
+          <p>Wang Tiles</p>
+        </a>
+        <a href="1-geometry/truchet/index.html" class="card">
+          <h3>트루셰 타일링</h3>
+          <p>Truchet Tiling</p>
+        </a>
+        <a href="1-geometry/triangulation/index.html" class="card">
+          <h3>삼각분할</h3>
+          <p>Ear Clipping</p>
+        </a>
+        <a href="1-geometry/treemap/index.html" class="card">
+          <h3>트리맵</h3>
+          <p>Treemap</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- 2단계 -->
+    <section>
+      <div class="section-header">
+        <h2>2단계: 결정론적 시스템의 설계</h2>
+        <p>Deterministic System Design</p>
+      </div>
+      <div class="grid">
+        <a href="2-deterministic-system/fractal-koch/koch-snowflake/index.html" class="card">
+          <span class="tag">Fractal</span>
+          <h3>코흐 눈송이</h3>
+          <p>Koch Snowflake</p>
+        </a>
+        <a href="2-deterministic-system/fractal-koch/sierpinski-triangle/index.html" class="card">
+          <span class="tag">Fractal</span>
+          <h3>시에르핀스키 삼각형</h3>
+          <p>Sierpinski Triangle</p>
+        </a>
+        <a href="2-deterministic-system/ifs/sierpinski-triangle/index.html" class="card">
+          <span class="tag">IFS</span>
+          <h3>시에르핀스키 삼각형</h3>
+          <p>Sierpinski Triangle</p>
+        </a>
+        <a href="2-deterministic-system/ifs/sierpinski-carpet/index.html" class="card">
+          <span class="tag">IFS</span>
+          <h3>시에르핀스키 카펫</h3>
+          <p>Sierpinski Carpet</p>
+        </a>
+        <a href="2-deterministic-system/ifs/spiral/index.html" class="card">
+          <span class="tag">IFS</span>
+          <h3>나선</h3>
+          <p>Spiral</p>
+        </a>
+        <a href="2-deterministic-system/barnsley-fern/index.html" class="card">
+          <span class="tag">IFS</span>
+          <h3>반슬리 고사리</h3>
+          <p>Barnsley Fern</p>
+        </a>
+        <a href="2-deterministic-system/l-system/plant/index.html" class="card">
+          <span class="tag">L-System</span>
+          <h3>프랙탈 식물</h3>
+          <p>Fractal Plant</p>
+        </a>
+        <a href="2-deterministic-system/l-system/koch-curve/index.html" class="card">
+          <span class="tag">L-System</span>
+          <h3>코흐 곡선</h3>
+          <p>Koch Curve</p>
+        </a>
+        <a href="2-deterministic-system/l-system/dragon/index.html" class="card">
+          <span class="tag">L-System</span>
+          <h3>드래곤 곡선</h3>
+          <p>Dragon Curve</p>
+        </a>
+        <a href="2-deterministic-system/l-system/arrowhead/index.html" class="card">
+          <span class="tag">L-System</span>
+          <h3>시에르핀스키 화살촉</h3>
+          <p>Arrowhead Curve</p>
+        </a>
+        <a href="2-deterministic-system/shape-grammar/index.html" class="card">
+          <h3>형태 문법</h3>
+          <p>Shape Grammar</p>
+        </a>
+        <a href="2-deterministic-system/phyllotaxis/index.html" class="card">
+          <h3>잎차례</h3>
+          <p>Phyllotaxis</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- 3단계 -->
+    <section>
+      <div class="section-header">
+        <h2>3단계: 제어된 무작위성의 도입</h2>
+        <p>Controlled Randomness</p>
+      </div>
+      <div class="grid">
+        <a href="3-controlled-randomness/perlin-noise/index.html" class="card">
+          <h3>펄린 노이즈</h3>
+          <p>Perlin Noise</p>
+        </a>
+        <a href="3-controlled-randomness/flow-field/index.html" class="card">
+          <h3>플로우필드</h3>
+          <p>Flow Field</p>
+        </a>
+        <a href="3-controlled-randomness/curl-noise/index.html" class="card">
+          <h3>컬 노이즈</h3>
+          <p>Curl Noise</p>
+        </a>
+        <a href="3-controlled-randomness/poisson-disk/index.html" class="card">
+          <h3>푸아송 디스크 샘플링</h3>
+          <p>Poisson Disk</p>
+        </a>
+        <a href="3-controlled-randomness/circle-packing/index.html" class="card">
+          <h3>원 채우기</h3>
+          <p>Circle Packing</p>
+        </a>
+        <a href="3-controlled-randomness/rectangle-packing/index.html" class="card">
+          <h3>사각형 채우기</h3>
+          <p>Rectangle Packing</p>
+        </a>
+        <a href="3-controlled-randomness/apollonian-gasket/index.html" class="card">
+          <h3>아폴로니안 가스켓</h3>
+          <p>Apollonian Gasket</p>
+        </a>
+        <a href="3-controlled-randomness/voronoi/index.html" class="card">
+          <h3>보로노이 다이어그램</h3>
+          <p>Voronoi Diagram</p>
+        </a>
+        <a href="3-controlled-randomness/delaunay/index.html" class="card">
+          <h3>델로네 삼각분할</h3>
+          <p>Delaunay Triangulation</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- 4단계 -->
+    <section>
+      <div class="section-header">
+        <h2>4단계: 자율적 창발과 시뮬레이션</h2>
+        <p>Autonomous Emergence</p>
+      </div>
+      <div class="grid">
+        <a href="4-autonomous-emergence/cellular-automata/wolfram/index.html" class="card">
+          <span class="tag">Cellular Automata</span>
+          <h3>Wolfram 1차원 CA</h3>
+          <p>Rule 110</p>
+        </a>
+        <a href="4-autonomous-emergence/cellular-automata/game-of-life/index.html" class="card">
+          <span class="tag">Cellular Automata</span>
+          <h3>Conway 생명 게임</h3>
+          <p>Game of Life</p>
+        </a>
+        <a href="4-autonomous-emergence/langtons-ant/index.html" class="card">
+          <h3>랭턴의 개미</h3>
+          <p>Langton's Ant</p>
+        </a>
+        <a href="4-autonomous-emergence/reaction-diffusion/index.html" class="card">
+          <h3>반응확산 (튜링 패턴)</h3>
+          <p>Reaction-Diffusion</p>
+        </a>
+        <a href="4-autonomous-emergence/dla/index.html" class="card">
+          <h3>확산 제한 응집</h3>
+          <p>DLA</p>
+        </a>
+        <a href="4-autonomous-emergence/physarum/index.html" class="card">
+          <h3>점균류 시뮬레이션</h3>
+          <p>Physarum</p>
+        </a>
+        <a href="4-autonomous-emergence/space-colonization/index.html" class="card">
+          <h3>공간 점유 알고리즘</h3>
+          <p>Space Colonization</p>
+        </a>
+        <a href="4-autonomous-emergence/differential-growth/index.html" class="card">
+          <h3>차분 성장</h3>
+          <p>Differential Growth</p>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+
+</html>

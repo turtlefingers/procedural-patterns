@@ -1,0 +1,32 @@
+# Custom rules for this project
+refer/
+temp/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node / npm (if used later)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# AI Assistants
+.claude/
+.cursor/
+.gemini/
