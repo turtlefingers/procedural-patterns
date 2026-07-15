@@ -93,11 +93,12 @@
     }
 
     .card {
-      display: block;
+      display: flex;
+      flex-direction: column;
       background-color: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 24px;
+      padding: 0;
       text-decoration: none;
       color: var(--text-main);
       transition: all 0.25s ease;
@@ -105,7 +106,35 @@
       overflow: hidden;
     }
 
+    .card-image {
+      width: 100%;
+      aspect-ratio: 2 / 1;
+      background-color: #f5f5f5;
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-content {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      transition: background-color 0.25s ease;
+    }
+
     .card:hover {
+      border-color: var(--text-main);
+    }
+
+    .card:hover .card-content {
       background-color: var(--text-main);
       color: var(--bg-color);
     }
@@ -151,7 +180,7 @@
 
   <header>
     <h1>Procedural Patterns</h1>
-    <p>주체와 통제권의 관점에서 분류한 37가지 그래픽 알고리즘 컬렉션</p>
+    <p>주체와 통제권의 관점에서 분류한 36가지 그래픽 알고리즘 컬렉션</p>
   </header>
 
   <main>
@@ -163,37 +192,77 @@
       </div>
       <div class="grid">
         <a href="1-geometry/wallpaper-group/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/1-geometry_wallpaper-group.png" alt="벽지군" loading="lazy">
+        </div>
+        <div class="card-content">
           <h3>벽지군</h3>
           <p>Wallpaper Groups</p>
-        </a>
+        </div>
+      </a>
         <a href="1-geometry/frieze-group/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/1-geometry_frieze-group.png" alt="프리즈군" loading="lazy">
+        </div>
+        <div class="card-content">
           <h3>프리즈군</h3>
           <p>Frieze Groups</p>
-        </a>
+        </div>
+      </a>
         <a href="1-geometry/kaleidoscope/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/1-geometry_kaleidoscope.png" alt="만화경 대칭" loading="lazy">
+        </div>
+        <div class="card-content">
           <h3>만화경 대칭</h3>
           <p>Kaleidoscope</p>
-        </a>
+        </div>
+      </a>
         <a href="1-geometry/girih/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/1-geometry_girih.png" alt="이슬람 기하학 패턴" loading="lazy">
+        </div>
+        <div class="card-content">
           <h3>이슬람 기하학 패턴</h3>
           <p>Girih</p>
-        </a>
+        </div>
+      </a>
         <a href="1-geometry/wang-tiles/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/1-geometry_wang-tiles.png" alt="왕타일" loading="lazy">
+        </div>
+        <div class="card-content">
           <h3>왕타일</h3>
           <p>Wang Tiles</p>
-        </a>
+        </div>
+      </a>
         <a href="1-geometry/truchet/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/1-geometry_truchet.png" alt="트루셰 타일링" loading="lazy">
+        </div>
+        <div class="card-content">
           <h3>트루셰 타일링</h3>
           <p>Truchet Tiling</p>
-        </a>
+        </div>
+      </a>
         <a href="1-geometry/triangulation/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/1-geometry_triangulation.png" alt="삼각분할" loading="lazy">
+        </div>
+        <div class="card-content">
           <h3>삼각분할</h3>
           <p>Ear Clipping</p>
-        </a>
+        </div>
+      </a>
         <a href="1-geometry/treemap/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/1-geometry_treemap.png" alt="트리맵" loading="lazy">
+        </div>
+        <div class="card-content">
           <h3>트리맵</h3>
           <p>Treemap</p>
-        </a>
+        </div>
+      </a>
       </div>
     </section>
 
@@ -205,63 +274,114 @@
       </div>
       <div class="grid">
         <a href="2-deterministic-system/fractal-koch/koch-snowflake/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/2-deterministic-system_koch-snowflake.png" alt="코흐 눈송이" loading="lazy">
+        </div>
+        <div class="card-content">
           <span class="tag">Fractal</span>
           <h3>코흐 눈송이</h3>
           <p>Koch Snowflake</p>
-        </a>
-        <a href="2-deterministic-system/fractal-koch/sierpinski-triangle/index.html" class="card">
-          <span class="tag">Fractal</span>
-          <h3>시에르핀스키 삼각형</h3>
-          <p>Sierpinski Triangle</p>
-        </a>
+        </div>
+      </a>
+
         <a href="2-deterministic-system/ifs/sierpinski-triangle/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/2-deterministic-system_sierpinski-triangle.png" alt="시에르핀스키 삼각형" loading="lazy">
+        </div>
+        <div class="card-content">
           <span class="tag">IFS</span>
           <h3>시에르핀스키 삼각형</h3>
           <p>Sierpinski Triangle</p>
-        </a>
+        </div>
+      </a>
         <a href="2-deterministic-system/ifs/sierpinski-carpet/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/2-deterministic-system_sierpinski-carpet.png" alt="시에르핀스키 카펫" loading="lazy">
+        </div>
+        <div class="card-content">
           <span class="tag">IFS</span>
           <h3>시에르핀스키 카펫</h3>
           <p>Sierpinski Carpet</p>
-        </a>
+        </div>
+      </a>
         <a href="2-deterministic-system/ifs/spiral/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/2-deterministic-system_spiral.png" alt="나선" loading="lazy">
+        </div>
+        <div class="card-content">
           <span class="tag">IFS</span>
           <h3>나선</h3>
           <p>Spiral</p>
-        </a>
+        </div>
+      </a>
         <a href="2-deterministic-system/barnsley-fern/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/2-deterministic-system_barnsley-fern.png" alt="반슬리 고사리" loading="lazy">
+        </div>
+        <div class="card-content">
           <span class="tag">IFS</span>
           <h3>반슬리 고사리</h3>
           <p>Barnsley Fern</p>
-        </a>
+        </div>
+      </a>
         <a href="2-deterministic-system/l-system/plant/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/2-deterministic-system_plant.png" alt="프랙탈 식물" loading="lazy">
+        </div>
+        <div class="card-content">
           <span class="tag">L-System</span>
           <h3>프랙탈 식물</h3>
           <p>Fractal Plant</p>
-        </a>
+        </div>
+      </a>
         <a href="2-deterministic-system/l-system/koch-curve/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/2-deterministic-system_koch-curve.png" alt="코흐 곡선" loading="lazy">
+        </div>
+        <div class="card-content">
           <span class="tag">L-System</span>
           <h3>코흐 곡선</h3>
           <p>Koch Curve</p>
-        </a>
+        </div>
+      </a>
         <a href="2-deterministic-system/l-system/dragon/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/2-deterministic-system_dragon.png" alt="드래곤 곡선" loading="lazy">
+        </div>
+        <div class="card-content">
           <span class="tag">L-System</span>
           <h3>드래곤 곡선</h3>
           <p>Dragon Curve</p>
-        </a>
+        </div>
+      </a>
         <a href="2-deterministic-system/l-system/arrowhead/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/2-deterministic-system_arrowhead.png" alt="시에르핀스키 화살촉" loading="lazy">
+        </div>
+        <div class="card-content">
           <span class="tag">L-System</span>
           <h3>시에르핀스키 화살촉</h3>
           <p>Arrowhead Curve</p>
-        </a>
+        </div>
+      </a>
         <a href="2-deterministic-system/shape-grammar/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/2-deterministic-system_shape-grammar.png" alt="형태 문법" loading="lazy">
+        </div>
+        <div class="card-content">
           <h3>형태 문법</h3>
           <p>Shape Grammar</p>
-        </a>
+        </div>
+      </a>
         <a href="2-deterministic-system/phyllotaxis/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/2-deterministic-system_phyllotaxis.png" alt="잎차례" loading="lazy">
+        </div>
+        <div class="card-content">
           <h3>잎차례</h3>
           <p>Phyllotaxis</p>
-        </a>
+        </div>
+      </a>
       </div>
     </section>
 
@@ -273,41 +393,86 @@
       </div>
       <div class="grid">
         <a href="3-controlled-randomness/perlin-noise/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/3-controlled-randomness_perlin-noise.png" alt="펄린 노이즈" loading="lazy">
+        </div>
+        <div class="card-content">
           <h3>펄린 노이즈</h3>
           <p>Perlin Noise</p>
-        </a>
+        </div>
+      </a>
         <a href="3-controlled-randomness/flow-field/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/3-controlled-randomness_flow-field.png" alt="플로우필드" loading="lazy">
+        </div>
+        <div class="card-content">
           <h3>플로우필드</h3>
           <p>Flow Field</p>
-        </a>
+        </div>
+      </a>
         <a href="3-controlled-randomness/curl-noise/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/3-controlled-randomness_curl-noise.png" alt="컬 노이즈" loading="lazy">
+        </div>
+        <div class="card-content">
           <h3>컬 노이즈</h3>
           <p>Curl Noise</p>
-        </a>
+        </div>
+      </a>
         <a href="3-controlled-randomness/poisson-disk/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/3-controlled-randomness_poisson-disk.png" alt="푸아송 디스크 샘플링" loading="lazy">
+        </div>
+        <div class="card-content">
           <h3>푸아송 디스크 샘플링</h3>
           <p>Poisson Disk</p>
-        </a>
+        </div>
+      </a>
         <a href="3-controlled-randomness/circle-packing/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/3-controlled-randomness_circle-packing.png" alt="원 채우기" loading="lazy">
+        </div>
+        <div class="card-content">
           <h3>원 채우기</h3>
           <p>Circle Packing</p>
-        </a>
+        </div>
+      </a>
         <a href="3-controlled-randomness/rectangle-packing/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/3-controlled-randomness_rectangle-packing.png" alt="사각형 채우기" loading="lazy">
+        </div>
+        <div class="card-content">
           <h3>사각형 채우기</h3>
           <p>Rectangle Packing</p>
-        </a>
+        </div>
+      </a>
         <a href="3-controlled-randomness/apollonian-gasket/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/3-controlled-randomness_apollonian-gasket.png" alt="아폴로니안 가스켓" loading="lazy">
+        </div>
+        <div class="card-content">
           <h3>아폴로니안 가스켓</h3>
           <p>Apollonian Gasket</p>
-        </a>
+        </div>
+      </a>
         <a href="3-controlled-randomness/voronoi/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/3-controlled-randomness_voronoi.png" alt="보로노이 다이어그램" loading="lazy">
+        </div>
+        <div class="card-content">
           <h3>보로노이 다이어그램</h3>
           <p>Voronoi Diagram</p>
-        </a>
+        </div>
+      </a>
         <a href="3-controlled-randomness/delaunay/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/3-controlled-randomness_delaunay.png" alt="델로네 삼각분할" loading="lazy">
+        </div>
+        <div class="card-content">
           <h3>델로네 삼각분할</h3>
           <p>Delaunay Triangulation</p>
-        </a>
+        </div>
+      </a>
       </div>
     </section>
 
@@ -319,39 +484,79 @@
       </div>
       <div class="grid">
         <a href="4-autonomous-emergence/cellular-automata/wolfram/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/4-autonomous-emergence_wolfram.png" alt="Wolfram 1차원 CA" loading="lazy">
+        </div>
+        <div class="card-content">
           <span class="tag">Cellular Automata</span>
           <h3>Wolfram 1차원 CA</h3>
           <p>Rule 110</p>
-        </a>
+        </div>
+      </a>
         <a href="4-autonomous-emergence/cellular-automata/game-of-life/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/4-autonomous-emergence_game-of-life.png" alt="Conway 생명 게임" loading="lazy">
+        </div>
+        <div class="card-content">
           <span class="tag">Cellular Automata</span>
           <h3>Conway 생명 게임</h3>
           <p>Game of Life</p>
-        </a>
+        </div>
+      </a>
         <a href="4-autonomous-emergence/langtons-ant/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/4-autonomous-emergence_langtons-ant.png" alt="랭턴의 개미" loading="lazy">
+        </div>
+        <div class="card-content">
           <h3>랭턴의 개미</h3>
           <p>Langton's Ant</p>
-        </a>
+        </div>
+      </a>
         <a href="4-autonomous-emergence/reaction-diffusion/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/4-autonomous-emergence_reaction-diffusion.png" alt="반응확산 (튜링 패턴)" loading="lazy">
+        </div>
+        <div class="card-content">
           <h3>반응확산 (튜링 패턴)</h3>
           <p>Reaction-Diffusion</p>
-        </a>
+        </div>
+      </a>
         <a href="4-autonomous-emergence/dla/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/4-autonomous-emergence_dla.png" alt="확산 제한 응집" loading="lazy">
+        </div>
+        <div class="card-content">
           <h3>확산 제한 응집</h3>
           <p>DLA</p>
-        </a>
+        </div>
+      </a>
         <a href="4-autonomous-emergence/physarum/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/4-autonomous-emergence_physarum.png" alt="점균류 시뮬레이션" loading="lazy">
+        </div>
+        <div class="card-content">
           <h3>점균류 시뮬레이션</h3>
           <p>Physarum</p>
-        </a>
+        </div>
+      </a>
         <a href="4-autonomous-emergence/space-colonization/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/4-autonomous-emergence_space-colonization.png" alt="공간 점유 알고리즘" loading="lazy">
+        </div>
+        <div class="card-content">
           <h3>공간 점유 알고리즘</h3>
           <p>Space Colonization</p>
-        </a>
+        </div>
+      </a>
         <a href="4-autonomous-emergence/differential-growth/index.html" class="card">
+        <div class="card-image">
+          <img src="screenshots/4-autonomous-emergence_differential-growth.png" alt="차분 성장" loading="lazy">
+        </div>
+        <div class="card-content">
           <h3>차분 성장</h3>
           <p>Differential Growth</p>
-        </a>
+        </div>
+      </a>
       </div>
     </section>
 
