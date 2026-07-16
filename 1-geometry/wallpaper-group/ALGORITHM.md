@@ -1,4 +1,9 @@
----
+# 벽지군 (Wallpaper Groups) — 대칭을 이용한 평면 타일링
+
+> **[AI Implementation Context]**
+> 이 문서는 해당 알고리즘을 다른 프로그래밍 언어(C++, Python, Unity, Rust 등)나 그래픽스 환경으로 이식(Porting)할 때 참조하기 위한 기하학/알고리즘 명세서입니다. 특정 언어의 그래픽스 API에 종속되지 않은 순수 논리와 수학적 규칙을 담고 있습니다.
+
+
 ## 0. 메인 기법 컨셉 (Main Technique Concept)
 17개 벽지군(Wallpaper Groups)은 평면을 빈틈없이 채우는 반복 무늬를 수학적 대칭성(평행이동, 회전, 반사, 미끄러짐 반사) 기준으로 분류한 것입니다. 정다각형 셀(Cell)의 테두리를 구불구불한 경로(Path)로 변형하고, 이 경로를 이웃 셀과 맞물리게 매핑함으로써 평면 전체에 패턴을 형성합니다.
 
@@ -43,37 +48,8 @@ for (let y = -rows; y <= rows; y++) {
   }
 }
 ```
----
 
-# 벽지군 — 육각 로제트 계열 5종 (p3, p3m1, p31m, p6, p6m)
-
-> **[AI Implementation Context]**
-> 이 문서는 해당 알고리즘을 다른 프로그래밍 언어(C++, Python, Unity, Rust 등)나 그래픽스 환경으로 이식(Porting)할 때 참조하기 위한 기하학/알고리즘 명세서입니다. 특정 언어의 그래픽스 API에 종속되지 않은 순수 논리와 수학적 규칙을 담고 있습니다.
-
-
-## 1. 개요 및 목적 (Overview)
-17개 벽지군 중 **3중·6중 회전 대칭**을 가진 육각 격자 계열 5종을 패널로 보여준다. cell-transformation 폴더와 같은 "변 굴곡" 프레임워크를 쓰되, 육각형 셀과 회전 대칭 규칙만 다르다.
-
-## 2. 핵심 이론 및 원리 (Core Concept & Math)
-- 격자 기저: 육각 배치 `xb = 1.5x`, `yb = -x·√3/2 + y·√3`.
-- 각 군의 대칭 = 변에 넣는 굴곡의 배열:
-  - **p3** (3중 회전): 변에 jay1/jay2를 번갈아.
-  - **p6** (6중 회전): 모든 변에 ess 굴곡.
-  - **p31m** : bump1/bump2 교대.
-  - **p3m1, p6m** (거울 포함): 거울선이 곧아야 하므로 **모든 변이 직선**.
-
-## 3. 알고리즘 의사코드 (Pseudocode)
-cell-transformation과 동일한 루프. 차이는 `getOutline(grp, x, y)`의 그룹별 굴곡 테이블뿐이다.
-```
-for (x,y) in 격자:
-    육각 꼭짓점 계산
-    for idx in 0..5:
-        path = 그룹별_굴곡[grp][idx]   // 위 규칙
-        outline += constructCurve(v[idx], v[idx+1], path)
-    fill(색으로 (x,y) 매핑); draw(outline)
-```
-
-## 4. 데이터 구조 및 이식 가이드 (Data Structures & Porting Guide)
-- 육각 꼭짓점: 중심에서 `(cos(k·60°), sin(k·60°))`, k=0..5.
-- 회전 대칭을 정확히 내려면 굴곡 path가 회전 하에 서로 아귀가 맞아야 한다(테이블 값을 그대로 복사).
-- 거울을 포함한 군(p3m1, p6m)은 경계가 직선이어야 함을 기억.
+## 5. 세부 기법 요약 (Sub-techniques Summary)
+- **[cell-transformation](cell-transformation/ALGORITHM.md)**: 사각/직사각/일반 격자 계열 10종. 변에 굴곡을 넣어 글라이드 및 회전 대칭을 만듭니다.
+- **[hexagonal-rosette](hexagonal-rosette/ALGORITHM.md)**: 육각 격자 계열 5종 (p3, p6 등). 3중/6중 회전 대칭을 보여줍니다.
+- **[rhombic-rosette](rhombic-rosette/ALGORITHM.md)**: 중심 격자(마름모) 계열 2종 (cm, cmm). 마름모 구조 안에서 거울/글라이드 대칭을 구현합니다.
