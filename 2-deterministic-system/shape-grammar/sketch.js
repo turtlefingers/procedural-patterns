@@ -106,15 +106,10 @@ let shapes = [];
 let drawingProgress = 0;
 
 function setup() {
-  let canvas = createCanvas(windowWidth, windowHeight);
-  canvas.style('display', 'block');
+  createCanvas(500, 500);
   loadPreset(currentPresetIndex);
 }
 
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-  loadPreset(currentPresetIndex);
-}
 
 function applyPreset(preset, x, y, s, a, depth) {
   if (depth <= 0 || s < 2 || shapes.length > 15000) return;
@@ -159,10 +154,10 @@ function loadPreset(index) {
 }
 
 function draw() {
-  background('#1a1a1a');
+  background(248);
   
   // Draw shapes up to drawingProgress
-  stroke(255, 255, 255, 180);
+  stroke(0, 180);
   noFill();
   
   let drawCount = min(floor(drawingProgress), shapes.length);
